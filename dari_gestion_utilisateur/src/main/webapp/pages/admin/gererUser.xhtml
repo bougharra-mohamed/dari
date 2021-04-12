@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+	<ui:param name="page_name" value="Accueil" />
+	<ui:define name="content">
+		
+				<h:panelGroup columns="2">
+					<h:form>
+						<table>
+							<tr>
+								<td><h:outputText value="Login (Email)"></h:outputText></td>
+								
+								<td>
+								
+								<h:inputText value="#{userController.login}" id="validationEmail" required="true" requiredMessage="Le champ email est obligatoire" 
+								validatorMessage="Le champ doit etre un email" >
+									<f:validateRegex pattern=".+\@.+\..+"></f:validateRegex>
+								</h:inputText>
+								
+								</td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Mot de Passe"></h:outputText></td>
+								<td><h:inputSecret value="#{userController.password}"></h:inputSecret></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Nom"></h:outputText></td>
+								<td><h:inputText value="#{userController.nom}"></h:inputText></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Prenom"></h:outputText></td>
+								<td><h:inputText value="#{userController.prenom}"></h:inputText></td>
+							</tr>
+							
+							<tr>
+								<td><h:outputText value="Role"></h:outputText></td>
+								<td><h:selectOneMenu value="#{userController.role}">
+										<f:selectItem itemLabel="Choisir le Role" itemValue="#{null}" />
+										<f:selectItems value="#{userController.roles}" />
+									</h:selectOneMenu></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+								<h:commandButton value="Ajouter user"
+										action="#{userController.addUser()}" /></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+								<h:commandButton value="Mettre A jour user"
+										action="#{userController.updateUser()}" />
+										</td>
+							</tr>
+							<h:message for="validationEmail" style="color:green"></h:message>
+						</table>
+					</h:form>
+				</h:panelGroup>
+	
+		<h:panelGroup columns="2">
+			<h:form>
+				<h:dataTable value="#{userController.users}" var="user"
+					border="1">
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Login (Email)" />
+						</f:facet>
+						<h:outputText value="#{user.email}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Prenom" />
+						</f:facet>
+						<h:outputText value="#{user.prenom}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Nom" />
+						</f:facet>
+						<h:outputText value="#{user.nom}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Role" />
+						</f:facet>
+						<h:outputText value="#{user.role}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Action" />
+						</f:facet>
+						<h:commandButton
+							action="#{userController.removeUser(user.id)}"
+							value="Supprimer" />
+						<h:commandButton
+							action="#{userController.displayUser(user)}"
+							value="Afficher" />
+					</h:column>
+
+				</h:dataTable>
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>

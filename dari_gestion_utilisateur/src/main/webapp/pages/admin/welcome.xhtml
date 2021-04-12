@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+	<ui:param name="page_name" value="Accueil" />
+	<ui:define name="content">
+		
+		<h:panelGroup>
+			<h:form>
+
+				<ui:define name="title">Choisir une fonctionnalité :</ui:define><br/>
+				<ui:define name="content"></ui:define>
+				<h:link outcome="/pages/admin/gererUser" value="Gérer les useres"></h:link>
+				<br/>
+				<br/>
+			
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
